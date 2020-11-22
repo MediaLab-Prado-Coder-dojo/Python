@@ -4,7 +4,7 @@ count_score = 0
 #esta función checa el marcador
 
 def score():
-  print(count_score)numeroentiendo
+  print(count_score)
 
 
 score()
@@ -53,13 +53,15 @@ def masmenos_uno(mas=True, numero=1):
 
 import random
 import time
+import keyboard
+
 
 area = (80,80)
 comida = [0,0]
 serp_loc = [0,0]
 long = 1
 speed = 1
-sentido = 
+serp_sentido = 0
 
 def poner_comida():
   global comida
@@ -82,18 +84,33 @@ def comer():
   else:
     pass
 
-def sentido(direccion):
+def conducir(direccion):
   global serp_loc
+  global serp_sentido
   
-  if direccion == 'der':
-    serp_loc[0] += 1
-  elif direccion == 'izq':
-    serp_loc[0] -= 1
-  elif direccion == 'arr':
-    serp_loc[1] += 1
-  else direccion == 'abj':
-    serp_loc[1] -= 1
+  if abs(serp_sentido - direccion) == 6:
+    pass
+  else:
+    serp_sentido = direccion
 
 def desplazamiento():
   global serp_loc
+  global serp_sentido
+  if serp_sentido == 3:
+    serp_loc[0] += 1
+  elif serp_sentido == 9:
+    serp_loc[0] -= 1
+  elif serp_sentido == 0:
+    serp_loc[1] += 1
+  elif serp_sentido == 6:
+    serp_loc[1] -= 1
   return serp_loc
+
+# def control(key):
+
+
+def iniciar_juego():
+  while True:
+    desplazamiento()
+    time.sleep(1)
+    print(serp_loc)
